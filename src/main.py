@@ -1,5 +1,8 @@
-from .notion import get_events
+from pathlib import Path
+
 from .ical import get_icalendar
+from .notion import get_events
+
 
 def get_icalendar_feed() -> bytes:
     events = get_events()
@@ -8,5 +11,7 @@ def get_icalendar_feed() -> bytes:
 
 if __name__ == "__main__":
     ical_feed = get_icalendar_feed()
-    with open("build/calendar.ics", "wb") as f:
+    file = Path(__file__).parent.parent / "build" / "calendar.ics"
+    file.parent.mkdir(parents=True, exist_ok=True)
+    with file.open("wb") as f:
         f.write(ical_feed)
