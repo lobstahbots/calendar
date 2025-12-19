@@ -1,0 +1,23 @@
+from .event import Event
+import icalendar
+from datetime import timedelta
+
+
+def get_icalendar(events: list[Event]) -> icalendar.Calendar:
+    cal = icalendar.Calendar()
+    cal.color = "#c40000"
+    cal.calendar_name = "Lobstah Bots Calendar"
+    for event in events:
+        ical_event = icalendar.Event()
+        ical_event.uid = event.id
+        ical_event.add("summary", event.title)
+        ical_event.start = event.start_date
+        if event.end_date:
+            ical_event.end = event.end_date + timedelta(days=1)
+        if event.location:
+            if event.location.strip().lower() == "lab":
+                event.location = "110 Cummington Mall, Boston, MA, 02215"
+            ical_event.add("location", event.location)
+        ical_event.add("description", event.description)
+        cal.add_component(ical_event)
+    return cal
