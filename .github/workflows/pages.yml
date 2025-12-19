@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-python@v6.1.0
         with:
           python-version: 3.13.11
-          pip-install: requirements.txt
+          pip-install: -r requirements.txt
       - name: Run ICS build
         run: python -m src.main
         env:
