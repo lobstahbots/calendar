@@ -1,4 +1,5 @@
 from pathlib import Path
+from shutil import copy2
 
 from .ical import get_icalendar
 from .notion import get_events
@@ -15,3 +16,4 @@ if __name__ == "__main__":
     file.parent.mkdir(parents=True, exist_ok=True)
     with file.open("wb") as f:
         f.write(ical_feed)
+    copy2(file, file.parent / "index.html")
