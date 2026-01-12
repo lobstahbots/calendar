@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime
 from typing import Optional
 
 
@@ -7,7 +7,7 @@ from typing import Optional
 class Event:
     id: str
     title: str
-    start_date: date
-    end_date: Optional[date] = None
+    start_date: date | datetime
+    end_date: Optional[date | datetime] = None
     location: Optional[str] = None
     description: str = ""
